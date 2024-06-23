@@ -7,6 +7,7 @@ import com.jmendoza.account.core.exception.NotFoundException;
 import com.jmendoza.account.domain.Account;
 import com.jmendoza.account.dto.AccountDto;
 import com.jmendoza.account.dto.CreateAccountDto;
+import com.jmendoza.account.dto.CustomerDto;
 import com.jmendoza.account.dto.UpdateAccountDto;
 import com.jmendoza.account.repository.AccountRepository;
 import jakarta.transaction.Transactional;
@@ -24,7 +25,7 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
-    private final MessageProducer messageProducer;
+    private final CustomerMessageProducer customerMessageProducer;
 
     /**
      * Encontrar todas las cuentas
@@ -74,22 +75,17 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto create(CreateAccountDto dto) {
         Account account = new Account(dto);
         validateCustomerExists(dto.getCustomerId());
-        account = this.accountRepository.save(account);
+        account = accountRepository.save(account);
         log.info("Cuenta creada con numero {}", account.getNumber());
         return new AccountDto(account);
     }
 
     /**
      * Validar que el cliente exista
-     *
      * @param customerId El ID del cliente
      */
     private void validateCustomerExists(String customerId) {
-        var customerResponse = messageProducer.findCustomer(customerId);
-        var customerExists = customerResponse.isOk();
-        if (!customerExists) {
-            throw new CustomException(customerResponse.getHttpStatus(), customerResponse.getCode(), customerResponse.getMessage());
-        }
+        customerMessageProducer.findCustomer(customerId);
     }
 
     /**

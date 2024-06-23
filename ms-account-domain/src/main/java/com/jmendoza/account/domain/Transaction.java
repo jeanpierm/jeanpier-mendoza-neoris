@@ -43,7 +43,7 @@ public class Transaction extends BaseEntity {
     /**
      * Cuenta que realizó el movimiento
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "account_number", nullable = false)
     private Account account;
 

@@ -2,6 +2,7 @@ package com.jmendoza.account.domain;
 
 import com.jmendoza.account.core.enums.AccountType;
 import com.jmendoza.account.dto.CreateAccountDto;
+import com.jmendoza.account.util.Strings;
 import jakarta.persistence.*;
 import lombok.*;
 import org.yaml.snakeyaml.util.EnumUtils;
@@ -75,5 +76,9 @@ public class Account extends BaseEntity {
 
     public void reverseBalance(BigDecimal value) {
         this.balance = this.balance.subtract(value);
+    }
+
+    public String getNumberFormatted() {
+        return Strings.leftPadWithZero(number.toString(), NUMBER_LENGTH_AS_STR);
     }
 }

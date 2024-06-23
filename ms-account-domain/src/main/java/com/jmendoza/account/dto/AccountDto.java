@@ -30,7 +30,7 @@ public class AccountDto {
     public AccountDto(Account account) {
         this.state = account.getState();
         this.balance = account.getBalance();
-        this.number = Strings.leftPadWithZero(account.getNumber().toString(), Account.NUMBER_LENGTH_AS_STR);
+        this.number = account.getNumberFormatted();
         this.customerId = account.getCustomerId();
         this.type = account.getType().name();
     }

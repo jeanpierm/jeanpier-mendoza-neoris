@@ -4,6 +4,7 @@ services:
     container_name: postgresql
     volumes:
       - postgres:/var/lib/postgresql
+      - ./database:/docker-entrypoint-initdb.d # load database script
     ports:                               
       - "5432:5432"
     environment:   
@@ -12,17 +13,7 @@ services:
       POSTGRES_DB: neoris
     networks:
       - neoris
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: pgadmin4_container
-  #   restart: always
-  #   ports:
-  #     - "8888:80"
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
-  #     PGADMIN_DEFAULT_PASSWORD: strong-password
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
+
   zoo:
     container_name: zookeeper
     image: confluentinc/cp-zookeeper:7.6.1
@@ -50,37 +41,49 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - neoris
-  kafka-ui:
-    container_name: kafka-ui
-    image: provectuslabs/kafka-ui:v0.7.2
-    depends_on:
-      - kafka
-    ports:
-      - 8090:8080
+
+  ms-customer-domain:
+    container_name: ms-customer-domain
+    build:
+      context: ./ms-customer-domain
+      dockerfile: Dockerfile
+    image: ms-customer-domain:latest
     environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zoo:2181
+      - server.port=8080
+      - spring_datasource_url=jdbc:postgresql://postgres:5432/neoris
+      - spring_datasource_username=admin
+      - spring_datasource_password=admin
+      - spring.kafka.bootstrap-servers=kafka:29092
+      - spring.jpa.hibernate.ddl-auto=none
+    ports:
+      - "8080:8080"
+    restart: always
     networks:
       - neoris
-#  ms-account-domain:
-#    container_name: ms-account-domain
-#    build:
-#      context: ./ms-account-domain
-#      dockerfile: Dockerfile
-#    image: ms-account-domain:latest
-#    environment:
-#      - spring_datasource_url=jdbc:postgresql://postgres:5432/neoris
-#      - spring_datasource_username=admin
-#      - spring_datasource_password=admin
-#    ports:
-#      - "8081:8081"
-#    restart: always
-#    networks:
-#      - neoris
-#    depends_on:
-#      - postgres
-#      - kafka
+    depends_on:
+      - postgres
+      - kafka
+  ms-account-domain:
+    container_name: ms-account-domain
+    build:
+      context: ./ms-account-domain
+      dockerfile: Dockerfile
+    image: ms-account-domain:latest
+    environment:
+      - server.port=8081
+      - spring_datasource_url=jdbc:postgresql://postgres:5432/neoris
+      - spring_datasource_username=admin
+      - spring_datasource_password=admin
+      - spring.kafka.bootstrap-servers=kafka:9092
+      - spring.jpa.hibernate.ddl-auto=none
+    ports:
+      - "8081:8081"
+    restart: always
+    networks:
+      - neoris
+    depends_on:
+      - postgres
+      - kafka
 networks:
   neoris:
 volumes:

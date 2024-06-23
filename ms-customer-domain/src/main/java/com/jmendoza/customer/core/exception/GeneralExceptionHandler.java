@@ -31,25 +31,25 @@ public class GeneralExceptionHandler {
         for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
             errors.add(fieldError.getField() + ": " + fieldError.getDefaultMessage());
         }
-        var status = HttpStatus.BAD_REQUEST.value();
+        var status = HttpStatus.BAD_REQUEST;
         var body = new ApiResponse<Void>(
-                status,
+                status.value(),
                 ResponseDictionary.INVALID_REQUEST.getCode(),
                 ResponseDictionary.INVALID_REQUEST.getMessage() + ": " + errors
         );
         log.error("Invalid Request: {}", errors);
-        return new ResponseEntity<>(body, HttpStatusCode.valueOf(status));
+        return new ResponseEntity<>(body, status);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<Void>> handleRuntimeException(RuntimeException e) {
-        var status = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        var status = HttpStatus.INTERNAL_SERVER_ERROR;
         var body = new ApiResponse<Void>(
-                status,
+                status.value(),
                 ResponseDictionary.INTERNAL_SERVER_ERROR.getCode(),
                 ResponseDictionary.INTERNAL_SERVER_ERROR.getMessage()
         );
         log.error("Internal Server Error: {}", e.getMessage(), e);
-        return new ResponseEntity<>(body, HttpStatusCode.valueOf(status));
+        return new ResponseEntity<>(body, status);
     }
 }

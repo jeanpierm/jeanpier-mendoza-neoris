@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -31,25 +32,37 @@ public class GeneralExceptionHandler {
         for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
             errors.add(fieldError.getField() + ": " + fieldError.getDefaultMessage());
         }
-        var status = HttpStatus.BAD_REQUEST.value();
+        var status = HttpStatus.BAD_REQUEST;
         var body = new ApiResponse<Void>(
-                status,
+                status.value(),
                 ResponseDictionary.INVALID_REQUEST.getCode(),
                 ResponseDictionary.INVALID_REQUEST.getMessage() + ": " + errors
         );
         log.error("Invalid Request: {}", errors);
-        return new ResponseEntity<>(body, HttpStatusCode.valueOf(status));
+        return new ResponseEntity<>(body, status);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        var status = HttpStatus.BAD_REQUEST;
+        var body = new ApiResponse<Void>(
+                status.value(),
+                ResponseDictionary.INVALID_REQUEST.getCode(),
+                ResponseDictionary.INVALID_REQUEST.getMessage() + ": " + e.getMessage()
+        );
+        log.error("Invalid Request by request params: {}", e.getMessage());
+        return new ResponseEntity<>(body, status);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<Void>> handleRuntimeException(RuntimeException e) {
-        var status = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        var status = HttpStatus.INTERNAL_SERVER_ERROR;
         var body = new ApiResponse<Void>(
-                status,
+                status.value(),
                 ResponseDictionary.INTERNAL_SERVER_ERROR.getCode(),
                 ResponseDictionary.INTERNAL_SERVER_ERROR.getMessage()
         );
         log.error("Internal Server Error: {}", e.getMessage(), e);
-        return new ResponseEntity<>(body, HttpStatusCode.valueOf(status));
+        return new ResponseEntity<>(body, status);
     }
 }

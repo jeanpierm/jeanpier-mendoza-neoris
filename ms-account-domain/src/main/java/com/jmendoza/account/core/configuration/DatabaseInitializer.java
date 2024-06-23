@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DatabaseInitializer implements CommandLineRunner {
 
-    private static final String CREATE_FK_ACCOUNT_CUSTOMER = "ALTER TABLE account ADD CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customer(customer_id);";
+    private static final String CREATE_FK_ACCOUNT_CUSTOMER =
+            "ALTER TABLE account " +
+                    "ADD CONSTRAINT fk_customer " +
+                    "FOREIGN KEY (customer_id) " +
+                    "REFERENCES customer(customer_id)" +
+                    "ON DELETE CASCADE;";
 
     private final JdbcTemplate jdbcTemplate;
 

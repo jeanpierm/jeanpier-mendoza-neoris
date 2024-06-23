@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 public class UpdateAccountDto {
-    @EnumPattern(regexp = "AHO|CTE")
+    @EnumPattern(regexp = "AHORROS|CORRIENTE")
     private String type;
 
     @DecimalMin(value = "1", message = "El saldo inicial debe ser mayor a 0")

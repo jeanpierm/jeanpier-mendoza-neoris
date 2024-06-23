@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 @Data
 public class CreateAccountDto {
-    @EnumPattern(regexp = "AHO|CTE")
+    @EnumPattern(regexp = "AHORROS|CORRIENTE")
     @NotEmpty(message = "El tipo de cuenta es requerido")
     private String type;
 
