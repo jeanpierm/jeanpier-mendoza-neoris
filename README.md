@@ -31,7 +31,7 @@
 ## Entregables 📦
 
 - [x] Script de base de datos: [BaseDatos.sql](database/BaseDatos.sql)
-- [x] Colección Postman: [jeanpier-mendoza-neoris.postman_collection.json](postman/jeanpier-mendoza-prueba.postman_collection.json)
+- [x] Colección Postman: [jeanpier-mendoza-prueba.postman_collection.json](postman/jeanpier-mendoza-prueba.postman_collection.json)
 
 ## Requisitos para desplegar la solución 📋
 
