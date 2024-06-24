@@ -22,7 +22,7 @@
 ├─ 📂 ms-customer-domain
 ├─ 📂 ms-account-domain
 ├─ 📂 postman
-├──── 📄 jeanpier-mendoza-neoris.postman_collection.json
+├──── 📄 jeanpier-mendoza-prueba.postman_collection.json
 ├─ 📄 compose.yml
 ├─ 📄 README.md
 ├─ 📑 run.sh
@@ -31,7 +31,7 @@
 ## Entregables 📦
 
 - [x] Script de base de datos: [BaseDatos.sql](database/BaseDatos.sql)
-- [x] Colección Postman: [jeanpier-mendoza-neoris.postman_collection.json](postman/jeanpier-mendoza-neoris.postman_collection.json)
+- [x] Colección Postman: [jeanpier-mendoza-neoris.postman_collection.json](postman/jeanpier-mendoza-prueba.postman_collection.json)
 
 ## Requisitos para desplegar la solución 📋
 
@@ -70,7 +70,7 @@ chmod +x run.sh
 
 1. Comprobar despliegue navegando a los Swaggers de los microservicios: <http://localhost:8080/swagger-ui/index.html> y <http://localhost:8081/swagger-ui/index.html>
 
-2. Importar la colección de Postman: [jeanpier-mendoza-neoris.postman_collection.json](postman/jeanpier-mendoza-neoris.postman_collection.json).
+2. Importar la colección de Postman: [jeanpier-mendoza-prueba.postman_collection.json](postman/jeanpier-mendoza-prueba.postman_collection.json).
 
 3. Probar! 🎉
 
