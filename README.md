@@ -1,4 +1,4 @@
-# Prueba NEORIS, por Jeanpier Mendoza 🇪🇨
+# Prueba, por Jeanpier Mendoza 🇪🇨
 
 ## Stack Tecnológico 🧑‍💻
 
@@ -15,7 +15,7 @@
 ## Estructura del Proyecto 📂
 
 ```
-📂 jeanpier-mendoza-neoris
+📂 jeanpier-mendoza-prueba
 └─ 📂 database
 ├──── 📄 BaseDatos.sql
 ├─ 📂 img
@@ -52,13 +52,13 @@
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/jeanpierm/jeanpier-mendoza-neoris.git
+git clone https://github.com/jeanpierm/jeanpier-mendoza-prueba.git
 ```
 
 2. Ingresar al directorio del proyecto:
 
 ```bash
-cd jeanpier-mendoza-neoris
+cd jeanpier-mendoza
 ```
 
 3. Ejecutar el script de despliegue:
