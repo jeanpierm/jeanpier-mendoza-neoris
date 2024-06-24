@@ -5,9 +5,9 @@ services:
     volumes:
       - postgres:/var/lib/postgresql
       - ./database:/docker-entrypoint-initdb.d # load database script
-    ports:                               
+    ports:
       - "5432:5432"
-    environment:   
+    environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: neoris
@@ -49,15 +49,21 @@ services:
       dockerfile: Dockerfile
     image: ms-customer-domain:latest
     environment:
-      - server.port=8080
-      - spring_datasource_url=jdbc:postgresql://postgres:5432/neoris
-      - spring_datasource_username=admin
-      - spring_datasource_password=admin
-      - spring.kafka.bootstrap-servers=kafka:29092
-      - spring.jpa.hibernate.ddl-auto=none
+      SERVER_PORT: 8080
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/neoris
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_JPA_HIBERNATE_DDL-auto: none
     ports:
       - "8080:8080"
     restart: always
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - neoris
     depends_on:
@@ -70,12 +76,18 @@ services:
       dockerfile: Dockerfile
     image: ms-account-domain:latest
     environment:
-      - server.port=8081
-      - spring_datasource_url=jdbc:postgresql://postgres:5432/neoris
-      - spring_datasource_username=admin
-      - spring_datasource_password=admin
-      - spring.kafka.bootstrap-servers=kafka:9092
-      - spring.jpa.hibernate.ddl-auto=none
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/neoris
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_JPA_HIBERNATE_DDL-auto: none
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     ports:
       - "8081:8081"
     restart: always

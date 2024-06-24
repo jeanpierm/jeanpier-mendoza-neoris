@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MessageListener {
+public class CustomerMessageListener {
 
     private final CustomerService customerService;
     private final ObjectMapper objectMapper;

@@ -5,9 +5,9 @@ import com.jmendoza.customer.core.enums.ResponseDictionary;
 import com.jmendoza.customer.core.exception.ConflictException;
 import com.jmendoza.customer.core.exception.NotFoundException;
 import com.jmendoza.customer.domain.Customer;
+import com.jmendoza.customer.dto.CreateCustomerDto;
 import com.jmendoza.customer.dto.CustomerDto;
 import com.jmendoza.customer.dto.UpdateCustomerDto;
-import com.jmendoza.customer.dto.CreateCustomerDto;
 import com.jmendoza.customer.dto.UpdatePasswordDto;
 import com.jmendoza.customer.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
@@ -97,7 +97,6 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto update(String id, UpdateCustomerDto dto) {
         var customer = findByIdAndValidateExists(id);
 
-        customer.setPersonId(dto.getIdentification());
         customer.setName(dto.getName());
         customer.setGender(EnumUtils.findEnumInsensitiveCase(Gender.class, dto.getGender()));
         customer.setAge(dto.getAge());
@@ -118,7 +117,6 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto partialUpdate(String id, UpdateCustomerDto dto) {
         var customer = findByIdAndValidateExists(id);
 
-        if (StringUtils.hasText(dto.getIdentification())) customer.setPersonId(dto.getIdentification());
         if (StringUtils.hasText(dto.getName())) customer.setName(dto.getName());
         if (dto.getGender() != null)
             customer.setGender(EnumUtils.findEnumInsensitiveCase(Gender.class, dto.getGender()));

@@ -1,4 +1,4 @@
-FROM amazoncorretto:21-alpine
+FROM amazoncorretto:21
 LABEL MAINTAINER="jeanpiermendoza@outlook.com"
 WORKDIR /app
 ARG JAR_FILE=target/*.jar
