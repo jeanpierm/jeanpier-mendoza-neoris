@@ -1,4 +1,4 @@
-# Prueba Neoris, por Jeanpier Mendoza 🇪🇨
+# Prueba NEORIS, por Jeanpier Mendoza 🇪🇨
 
 ## Stack Tecnológico 🧑‍💻
 
