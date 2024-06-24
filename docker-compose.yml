@@ -96,6 +96,7 @@ services:
     depends_on:
       - postgres
       - kafka
+      - ms-customer-domain
 networks:
   neoris:
 volumes:

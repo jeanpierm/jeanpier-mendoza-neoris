@@ -1,13 +1,9 @@
 package com.jmendoza.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jmendoza.account.core.enums.ResponseDictionary;
 import lombok.*;
 import org.springframework.http.HttpStatus;
-
-import java.io.IOException;
 
 @NoArgsConstructor
 @AllArgsConstructor

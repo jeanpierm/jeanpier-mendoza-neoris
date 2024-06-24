@@ -13,6 +13,9 @@ import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.yaml.snakeyaml.util.EnumUtils;
 
+/**
+ * Entidad Cliente
+ */
 @Entity
 @Table(name = "customer")
 @PrimaryKeyJoinColumn(name = "customer_id", referencedColumnName = "person_id")
@@ -22,9 +25,15 @@ import org.yaml.snakeyaml.util.EnumUtils;
 @ToString(callSuper = true)
 public class Customer extends Person {
 
+    /**
+     * Contraseña del cliente
+     */
     @Column(name = "password", nullable = false)
     private String password;
 
+    /**
+     * Estado del cliente
+     */
     @Column(name = "state", nullable = false)
     private Boolean state;
 

@@ -9,6 +9,9 @@ import org.yaml.snakeyaml.util.EnumUtils;
 
 import java.math.BigDecimal;
 
+/**
+ * Entidad Cuenta
+ */
 @Entity
 @Table(name = "account")
 @Getter
@@ -29,16 +32,28 @@ public class Account extends BaseEntity {
     @Column(name = "number", nullable = false, updatable = false)
     private Long number;
 
+    /**
+     * Tipo de cuenta
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private AccountType type;
 
+    /**
+     * Identificación del cliente
+     */
     @Column(name = "customer_id", nullable = false, length = CUSTOMER_ID_LENGTH)
     private String customerId;
 
+    /**
+     * Saldo de la cuenta
+     */
     @Column(name = "balance", nullable = false)
     private BigDecimal balance;
 
+    /**
+     * Estado de la cuenta
+     */
     @Column(name = "state", nullable = false)
     private Boolean state;
 
@@ -57,7 +72,6 @@ public class Account extends BaseEntity {
         this.state = Boolean.TRUE;
     }
 
-
     /**
      * Verificar si la cuenta tiene saldo suficiente
      *
@@ -70,14 +84,29 @@ public class Account extends BaseEntity {
         return balance.compareTo(value.abs()) >= 0; // balance es mayor o igual al valor absoluto de la transaccion
     }
 
+    /**
+     * Actualizar el saldo de la cuenta
+     *
+     * @param value Valor de la transacción
+     */
     public void updateBalance(BigDecimal value) {
         this.balance = this.balance.add(value);
     }
 
+    /**
+     * Revertir el saldo de la cuenta
+     *
+     * @param value Valor de la transacción
+     */
     public void reverseBalance(BigDecimal value) {
         this.balance = this.balance.subtract(value);
     }
 
+    /**
+     * Obtener el número de la cuenta formateado. Ejemplo: 0000000001
+     *
+     * @return Número de la cuenta formateado
+     */
     public String getNumberFormatted() {
         return Strings.leftPadWithZero(number.toString(), NUMBER_LENGTH_AS_STR);
     }

@@ -3,6 +3,10 @@ package com.jmendoza.account;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * MsAccountDomainApplication
+ * By: Jeanpier Mendoza
+ */
 @SpringBootApplication
 public class MsAccountDomainApplication {
 

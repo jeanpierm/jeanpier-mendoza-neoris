@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CustomerDto {
+
     @NotEmpty(groups = {Post.class}, message = "La identificación es requerida")
     @Size(min = 10, max = Customer.ID_LENGTH, message = "La identificación debe tener 10 a 13 caracteres")
     private String identification;

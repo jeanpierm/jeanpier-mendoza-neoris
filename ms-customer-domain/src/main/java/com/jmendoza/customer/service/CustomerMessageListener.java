@@ -20,6 +20,13 @@ public class CustomerMessageListener {
     private final CustomerService customerService;
     private final ObjectMapper objectMapper;
 
+    /**
+     * Escucha las peticiones de búsqueda de un cliente
+     *
+     * @param customerId El ID del cliente
+     * @return ApiResponse en formato JSON
+     * @throws JsonProcessingException si ocurre un error al serializar el objeto
+     */
     @KafkaListener(groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.find-customer-request.name}")
     @SendTo

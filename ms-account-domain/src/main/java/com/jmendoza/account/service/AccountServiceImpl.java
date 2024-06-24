@@ -2,12 +2,10 @@ package com.jmendoza.account.service;
 
 import com.jmendoza.account.core.enums.AccountType;
 import com.jmendoza.account.core.enums.ResponseDictionary;
-import com.jmendoza.account.core.exception.CustomException;
 import com.jmendoza.account.core.exception.NotFoundException;
 import com.jmendoza.account.domain.Account;
 import com.jmendoza.account.dto.AccountDto;
 import com.jmendoza.account.dto.CreateAccountDto;
-import com.jmendoza.account.dto.CustomerDto;
 import com.jmendoza.account.dto.UpdateAccountDto;
 import com.jmendoza.account.repository.AccountRepository;
 import jakarta.transaction.Transactional;
@@ -82,6 +80,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Validar que el cliente exista
+     *
      * @param customerId El ID del cliente
      */
     private void validateCustomerExists(String customerId) {

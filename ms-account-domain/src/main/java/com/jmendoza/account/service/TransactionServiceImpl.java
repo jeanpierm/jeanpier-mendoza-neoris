@@ -63,8 +63,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Crear un nuevo movimiento
+     *
      * @param accountNumber El número de cuenta
-     * @param dto Los datos del movimiento
+     * @param dto           Los datos del movimiento
      * @return El movimiento creado
      */
     @Override
@@ -89,9 +90,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Actualizar un movimiento por ID
+     *
      * @param accountNumber El número de cuenta
      * @param transactionId El ID del movimiento
-     * @param dto Los datos del movimiento
+     * @param dto           Los datos del movimiento
      * @return El movimiento actualizado
      */
     @Override
@@ -121,6 +123,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Eliminar un movimiento por ID
+     *
      * @param accountNumber El número de cuenta
      * @param transactionId El ID del movimiento
      */

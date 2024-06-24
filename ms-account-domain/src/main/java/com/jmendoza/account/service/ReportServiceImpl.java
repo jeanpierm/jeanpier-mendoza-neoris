@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Service
@@ -22,6 +21,14 @@ public class ReportServiceImpl implements ReportService {
     private final TransactionRepository transactionRepository;
     private final CustomerMessageProducer customerMessageProducer;
 
+    /**
+     * Genera un reporte de estado de cuentas
+     *
+     * @param customerId El ID del cliente
+     * @param startDate  La fecha de inicio
+     * @param endDate
+     * @return
+     */
     @Override
     public AccountsReportDto generateAccountsReport(String customerId, LocalDate startDate, LocalDate endDate) {
         Instant startDateInstant = startDate.atStartOfDay().toInstant(ZoneOffset.UTC);

@@ -1,14 +1,6 @@
 package com.jmendoza.account.dto;
 
-import com.jmendoza.account.core.annotations.EnumPattern;
-import com.jmendoza.account.core.constraints.Post;
-import com.jmendoza.account.core.constraints.Put;
 import com.jmendoza.account.domain.Account;
-import com.jmendoza.account.util.Strings;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

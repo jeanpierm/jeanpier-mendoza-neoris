@@ -2,7 +2,6 @@ package com.jmendoza.account.dto;
 
 import com.jmendoza.account.domain.Account;
 import com.jmendoza.account.domain.Transaction;
-import com.jmendoza.account.util.Strings;
 import lombok.Data;
 
 import java.math.BigDecimal;

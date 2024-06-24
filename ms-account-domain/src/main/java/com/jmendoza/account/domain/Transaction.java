@@ -8,6 +8,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+/**
+ * Entidad movimiento
+ */
 @Entity
 @Table(name = "transaction")
 @Getter
@@ -16,15 +19,24 @@ import java.math.BigDecimal;
 @ToString(callSuper = true)
 public class Transaction extends BaseEntity {
 
+    /**
+     * Identificador único del movimiento
+     */
     @Id
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "transaction_id", nullable = false, updatable = false)
     private String transactionId;
 
+    /**
+     * Tipo de movimiento (CREDIT o DEBIT)
+     */
     @Column(name = "transaction_type", nullable = false)
     private TransactionType type;
 
+    /**
+     * Valor del movimiento
+     */
     @Column(name = "value", nullable = false)
     private BigDecimal value;
 
@@ -72,7 +84,8 @@ public class Transaction extends BaseEntity {
      */
     public void setValue(BigDecimal value) {
         // no puede haber un movimiento de $0
-        if (value.compareTo(BigDecimal.ZERO) == 0) throw new BadRequestException(ResponseDictionary.INSUFFICIENT_BALANCE);
+        if (value.compareTo(BigDecimal.ZERO) == 0)
+            throw new BadRequestException(ResponseDictionary.INSUFFICIENT_BALANCE);
         this.value = value;
         this.type = this.isCredit() ? TransactionType.CREDIT : TransactionType.DEBIT;
     }

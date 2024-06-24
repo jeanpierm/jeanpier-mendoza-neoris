@@ -1,6 +1,5 @@
 package com.jmendoza.account.dto;
 
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
