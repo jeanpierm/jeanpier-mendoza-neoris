@@ -12,6 +12,10 @@
 - **Git 2.34**: para el control de versiones.
 - **Bash**: para la automatización del despliegue de la solución.
 
+## Arquitectura de la Solución 🏗️
+
+![arquitectura](img/architecture.png)
+
 ## Estructura del Proyecto 📂
 
 ```
@@ -101,6 +105,6 @@ chmod +x run.sh
 ![Despliegue](img/deploy.png)
 ![Despliegue 2](img/deploy2.png)
 
-## Gracias!
+## Gracias
 
 Por Jeanpier Mendoza 🇪🇨
